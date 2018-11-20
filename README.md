@@ -311,9 +311,9 @@ in the OO mindset.
 
 ## Conclusion
 
-In the upcoming lessons, we will be going into greater depth on how to think in
-Object Orientation while reviewing the specific structures and syntax used in
-JavaScript.
+There is a lot to involved in writing Object Oriented code. In the upcoming
+lessons, we will build `class`es from scratch, introduce `class` interactions
+and eventually develop fully Object Oriented applications.
 
 ## Resources
 
