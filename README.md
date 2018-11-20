@@ -15,46 +15,62 @@ So far in JavaScript, we've discussed the "Three Pillars of Web Programming",
 **Recognizing JS events**, **Manipulating the DOM**, and **Communicate with the
 server**, and we saw how these pillars are incorporated into web applications.
 
-The process we've learned has been straightforward:
+The process we've learned so far has been:
 
 1.  An HTML page renders on the screen
 2.  JavaScript is executed when the page loads
 3.  In the JavaScript, event listeners are created pointing to 'free-standing'
     functions, listed out in the JavaScript file.
 
+In that process, we have three primary takeaways:
+
 - Some of these functions handle DOM manipulation
 - Some functions handle server communication
 - Still other functions may serve as 'helper' functions to others
 
-This set up works great when just getting off the ground; with a handful of
-functions, we can get an interactive website up and running. What happens,
+These functions can be invoked in whatever order we set, or from within each
+other. This set up works great when just getting off the ground; with a handful
+of functions, we can get an interactive website up and running. What happens,
 though, when we want to go beyond a small website?
 
-Let's say we want to add feature, so we write a few more functions. Another
-function to handle a new event. That function needs to call a separate function
-for some DOM manipulation, then maybe a third function for updating our server.
-Meanwhile, it turns out, we can write a helper function that not only helps the
-code we just wrote, but cleans up some previous code we've written.
+Let's go back and take a look at the first app we discussed, [Simple Liker][simple liker]:
 
-Then we decide to add another, and more functions are needed. As we use our
-website, we think of more and more things to add or adjust. Pretty soon, the
-code has grown quite long. What's worse, all of the different things that happen
-on our website are starting to get jumbled together in a heap of functions. You
-may be able to get everything working for every feature we add, but coding this
-way comes at a cost:
+![working example of favoriting a post][three-pillars-example-working]
+
+Imagine we want to add a feature to this - we want to display the number of
+users who have liked this message. Let's say we can get this info from the
+server, so we write a function that fetches the data and updates the DOM to
+display it. This function could be called when the page loads as well as
+whenever anyone clicks the 'like' button.
+
+Great, but what happens when we start to expand further? Right now we only have
+the one message from Byron. What if we could have multiple messages to like?
+More functions would be needed. We'd probably have to modify the code that we
+have, as well, making it a more complicated.
+
+Continuing to expand our app, what about displaying a list of names of people
+who liked this post? More code is needed. How about being able to post our _own_
+messages for other users to like? Even more code. What about adding the option
+to add message comments? A lot more code.
+
+At this point, our Simple Liker would no longer be simple, and pretty soon, the
+code needed to keep all our features working has grown quite long. What's worse,
+all of the different things that happen on our website are starting to get
+jumbled together in a heap of functions. You may be able to get everything
+working for every feature added but the functions have become intertwined and dependent on each other. Coding this way comes at a cost:
 
 **The more complicated our code gets, the harder it is to understand and
 change it.**
 
 In larger applications, we might be dealing with hundreds of functions, DOM
-elements, and events, all dependent on each other, forming a web of
+elements, and events, all tied together, forming a web of
 relationships. It becomes increasingly difficult to follow the flow of actions
 in your code as more and more functions are introduced. Changes to one function
 may have unforeseen affects on functions _'downstream'_.
 
 This web of dependent, free-standing functions can be improved with
 organization. We do things like group functions together, arrange code in a
-readable way. Our options, however, are still limited - its still a big web.
+readable way. Our options, however, are still limited - it's still a big web.
 
 In this and the following lessons, we're going to take a look at an alternative
 way to structure our code, Object Orientation. By understanding and using OO, we
@@ -67,7 +83,7 @@ collection of _cells_. These cells are separated from each other, can contain
 information, data like variables, as well as behaviors, functions directly
 related to that data.
 
-Consider the lessons on so far: any sort of data we had to store and manipulate
+Consider the lessons so far: any sort of data we had to store and manipulate
 has been either stored in variables or passed to functions as arguments. Code
 like this:
 
@@ -228,7 +244,7 @@ that data is used. The `sarah` variable in the code snippet above points to an
 entire _instance_ of the `Person` class. Wherever `sarah` goes, `sarah` will
 always carry its instance methods with it. If we need to access data stored on
 the instance, we can send the `sarah` variable wherever it is needed and use the
-built in methods we've defined to access the information.
+built in methods _we've_ defined to access the information.
 
 ### Easy to Replicate
 
@@ -251,16 +267,10 @@ sarah.sayHello();
 ```
 
 This turns out to be a fantastic help when dealing with many collections of
-similar data. For example, individual records from a server side database can be
-represented as instances of a `class`.
-
-In an interactive application like an online chatroom where multiple people are
-present, you could design a `User` `class` that keeps track of individual
-chatroom users. We can go further, though, and design `class`es for other parts
-of the application. A `User` instance might have many messages in a chatroom, so
-we could create a `Message` `class`. If the application has multiple chatrooms,
-we could create a `Room` `class` to represent every chatroom and any specific
-data about each.
+similar data. For example, comments on a post - while
+the data is unique to each, comments should always 'behave' the same way - they
+all display the same on the page. With Object Orientation, we can write a
+`Comment` `class` and create an 'instance' for each unique comment.
 
 Once we establish the data and methods for a `class`, we can create as many
 copies as we need.
@@ -270,18 +280,23 @@ copies as we need.
 By encapsulating related information and behavior, we have organized our code in
 a more meaningful way. It _makes sense_ to us as humans to group related things
 like this. Object Orientation works well for representing real world systems
-and relationships, which makes it easier to comprehend complex code.
+and relationships in code, which makes it easier to comprehend.
 
 ```js
+let sarah = new Person('Sarah', 31);
+let evan = new Person('Evan', 34);
 let restaurant = new Restaurant('La Villa', '261 5th Ave, Brooklyn, NY');
-restaurant.addGuest(evan);
-restaurant.serveGuest(evan, new Drink('Water'));
-restaurant.addGuest(sally);
-restaurant.serveGuest(sally, new Drink('Water'));
+
 evan.sayHello();
 // => Hello, my name is Evan.
 sarah.sayHello();
 // => Hello, my name is Sarah.
+//
+restaurant.addGuest(evan);
+restaurant.addGuest(sally);
+restaurant.serveGuest(evan, new Drink('Water'));
+restaurant.serveGuest(sally, new Drink('Water'));
+
 evan.saySmallTalk();
 // => How about this weather?
 ```
@@ -290,52 +305,19 @@ All `class`es in are structured in a consistent way, so even though we don't
 know the details of the `Restaurant` `class`, we can still infer how the
 `Restaurant`, `Person` and `Drink` `class`es might interact.
 
-When it comes to building functionality into a website, we do tend to deal with
-the abstract, things that are harder to represent conceptually. Object
-Orientation helps here too, though it takes practice to think in the OO mindset.
-For example, we can organize related actions, such as server requests, into a
-single `class`.
-
-One common practice in OO Javascript is to use `class`es to represent different
-DOM elements. Consider what it we do currently to programmatically add a `div`
-to the page:
-
-```js
-let element = document.createElement('div');
-element.className = 'myClassName';
-element.innerHTML = 'This is the text content of the div';
-document.querySelector('body').appendChild(element);
-```
-
-Rewritten as a class could be something like:
-
-```js
-class DivComponent {
-	constructor(className, textContent) {
-		this.element = document.createElement('div');
-		this.element.className = className;
-		this.element.innerHTML = textContent;
-	}
-}
-
-let myDiv = new DivComponent(
-	'myClassName',
-	'This is the text content of the div'
-);
-document.querySelector('body').appendChild(myDiv.element);
-```
-
-By wrapping the `div` creation and set up in a class, we're pulled the code
-out into a design that documents and contains the related information we need.
+Even the more abstract concepts of web programming can be easier
+to understand using Object Orientation, though it takes some practice to think
+in the OO mindset.
 
 ## Conclusion
 
-In the upcoming lessons, we will using be going into greater depth on how to
-think in Object Orientation and about the specific structures and syntax we will
-use in JavaScript.
+In the upcoming lessons, we will be going into greater depth on how to think in
+Object Orientation while reviewing the specific structures and syntax used in
+JavaScript.
 
 ## Resources
 
 - [MDN - Object Oriented JavaScript for Beginners][mdn]
 
 [mdn]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS
+[simple liker]: https://github.com/learn-co-curriculum/fewpjs-stitching-together-the-three-pillars
