@@ -321,3 +321,4 @@ and eventually develop fully Object Oriented applications.
 
 [mdn]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS
 [simple liker]: https://github.com/learn-co-curriculum/fewpjs-stitching-together-the-three-pillars
+[three-pillars-example-working]: https://curriculum-content.s3.amazonaws.com/fewpjs/fewpjs-stitching-together-the-three-pillars/three-pillars-02.gif
