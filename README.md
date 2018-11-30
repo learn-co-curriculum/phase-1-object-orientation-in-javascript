@@ -80,8 +80,8 @@ can _design_ our code to be easier to read, understand and change.
 
 With Object Orientation, instead of a web, we can think of our code as a
 collection of _cells_. These cells are separated from each other, can contain
-information, data like variables, as well as behaviors, functions directly
-related to that data.
+_information_, bits of data like variables, as well as _behaviors_, functions
+directly related to that data.
 
 Consider the lessons so far: any sort of data we had to store and manipulate
 has been either stored in variables or passed to functions as arguments. Code
@@ -100,7 +100,6 @@ function sayAge(age) {
 }
 
 function haveBirthday(age) {
-	console.log(`It's my birthday!`);
 	return age + 1;
 }
 
@@ -109,7 +108,6 @@ sayHello(name);
 sayAge(age);
 // => I am 34 years old.
 age = haveBirthday(age);
-// => It's my birthday.
 sayAge(age);
 // => I am 35 years old.
 ```
@@ -159,14 +157,14 @@ evan.haveBirthday();
 evan.sayAge();
 // => I am 35 years old.
 evan;
-// => Person { name: 'Evan', age: 36 }
+// => Person { name: 'Evan', age: 35 }
 ```
 
 > You can try out the code above. Type `node` in your terminal, then
 > copy and paste the above code into the Node environment to play around
 
 Do not be alarmed if some of this looks unfamiliar. We will go into greater
-detail later about specific syntax.For now, though, take a moment to notice
+detail later about specific syntax. For now, though, take a moment to notice
 what changed. Where did our variables go? Now we just have one: `evan`.
 Instead of being assigned to a data type like a `String` or an `Integer`,
 `evan` assigned to a `Person` object that _contains_ our data.
@@ -183,17 +181,17 @@ this later). Two arguments are passed in, `'Evan'` and `34`, and the resulting
 instance is assigned to a variable.
 
 The instance we just created contains the functions that were previously
-free-standing, `sayHello`, `sayAge`, and `haveBirthday`.
+free-standing, `sayHello`, `sayAge`, and `haveBirthday`. Notice here that we're
+no longer passing data as arguments to these functions when we call them.
 
-Notice here that we're no longer passing data as arguments to these functions
-when we call them. Our data, `'Evan'` and `34`, is now stored _in_ the `Person`
-instance. These functions now have access to the data as `this.name` and
-`this.age`!
+> For clarity, in these lessons, functions that are contained within a `class`
+> or `class` instance will be referred to as 'methods'.
+> The word _'function'_ will be used when referring to functions outside of any `class`
+> object.
 
-> In Object Oriented JavaScript, functions that are contained within a `class` >
-> object are referred to as 'methods' of that object. These lessons will follow >
-> this convention, so going forward, _method_ and _function_ will differ slightly
-> in meaning.
+Instead of receiving arguments, our _methods_ have access to the data as
+`this.name` and `this.age`! These are referred to as _properties_, and are
+both assigned when a new instance of the `Person` class is created.
 
 With our data and _methods_ captured in the `Person` instance, we've
 **_encapsulated_** all the information and behaviors that represent a _person_ in
@@ -201,8 +199,9 @@ our code!
 
 ## The Benefits of Object Orientation
 
-The end result of our code hasn't change - we are still able to perform the same
-actions. However, the way we have _designed_ our code brings many benefits:
+The end result of our code example hasn't changed - we are still able to perform
+the same actions with minor modifications. However, by designing and creating
+`class`es like this, we can gain some important benefits:
 
 ### Easier to Change
 
@@ -213,11 +212,10 @@ in the future.
 
 ### Offers Better Data Control
 
-Compartmentalizing code also has a secondary effect - by encapsulating our data
-in a `class`, we can protect that data from unexpected changes. When using local
-variables like `let name = "Evan"`, the variable is vulnerable to change from
-any function, and functions will do what they are programmed to do, regardless
-of the data they are given. They are oblivious.
+By encapsulating our data in a `class`, we can protect that data from unexpected
+changes. When using local variables like `let name = "Evan"`, the variable is
+vulnerable to change from any function. Functions, meanwhile, will do what they
+are programmed to do, regardless of the data they are given. They are oblivious.
 
 ```js
 function sayHello(nameOfPerson) {
@@ -242,9 +240,20 @@ sarah.sayHello();
 Equally, using a `class` to encapsulate our data allows us to be specific in how
 that data is used. The `sarah` variable in the code snippet above points to an
 entire _instance_ of the `Person` class. Wherever `sarah` goes, `sarah` will
-always carry its instance methods with it. If we need to access data stored on
-the instance, we can send the `sarah` variable wherever it is needed and use the
-built in methods _we've_ defined to access the information.
+always carry its properties and methods with it. If we need to access
+data stored on the instance, we can get property values directly:
+
+```js
+sarah.name;
+// => 'Sarah'
+```
+
+Or use the built in methods _we've_ defined to access the information however we choose:
+
+```js
+sarah.sayAge();
+// => I am 31 years old.
+```
 
 ### Easy to Replicate
 
@@ -267,7 +276,7 @@ sarah.sayHello();
 ```
 
 This turns out to be a fantastic help when dealing with many collections of
-similar data. For example, comments on a post - while
+similar data. For example, comments on a blog post - while
 the data is unique to each, comments should always 'behave' the same way - they
 all display the same on the page. With Object Orientation, we can write a
 `Comment` `class` and create an 'instance' for each unique comment.
@@ -291,7 +300,7 @@ evan.sayHello();
 // => Hello, my name is Evan.
 sarah.sayHello();
 // => Hello, my name is Sarah.
-//
+
 restaurant.addGuest(evan);
 restaurant.addGuest(sally);
 restaurant.serveGuest(evan, new Drink('Water'));
@@ -301,19 +310,25 @@ evan.saySmallTalk();
 // => How about this weather?
 ```
 
-All `class`es in are structured in a consistent way, so even though we don't
+All `class`es are structured in a consistent way, so even though we don't
 know the details of the `Restaurant` `class`, we can still infer how the
 `Restaurant`, `Person` and `Drink` `class`es might interact.
 
-Even the more abstract concepts of web programming can be easier
-to understand using Object Orientation, though it takes some practice to think
-in the OO mindset.
+Many systems of inter-related things can be represented as objects interacting
+with one another, and being able to visualize these relationships helps when
+designing complex applications. Even the more abstract concepts of web
+programming can be easier to understand using Object Orientation, though it
+takes some practice to think in the OO mindset.
 
 ## Conclusion
 
 There is a lot to involved in writing Object Oriented code. In the upcoming
-lessons, we will build `class`es from scratch, introduce `class` interactions
-and eventually develop fully Object Oriented applications.
+lessons, we will build `class`es from scratch and talk about the different ways
+we can design them. Later on, we will introduce `class` interactions and how
+many instances of different `class`es can work together. Object Orientation
+can fundamentally change the way we design our code, but as we explore, we will
+see how proper design encourages code that is easier to use, understand, change
+and maintain.
 
 ## Resources
 
