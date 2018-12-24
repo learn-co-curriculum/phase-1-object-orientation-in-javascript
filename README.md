@@ -127,23 +127,23 @@ this:
 
 ```js
 class Person {
-	constructor(name, age) {
-		this.name = name;
-		this.age = age;
-	}
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
 
-	sayHello() {
-		console.log(`Hello, my name is ${this.name}.`);
-	}
+  sayHello() {
+    console.log(`Hello, my name is ${this.name}.`);
+  }
 
-	sayAge() {
-		console.log(`I am ${this.age} years old.`);
-	}
+  sayAge() {
+    console.log(`I am ${this.age} years old.`);
+  }
 
-	haveBirthday(age) {
-		console.log(`It's my birthday!`);
-		this.age += 1;
-	}
+  haveBirthday(age) {
+    console.log(`It's my birthday!`);
+    this.age += 1;
+  }
 }
 
 let evan = new Person('Evan', 34);
