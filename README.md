@@ -1,7 +1,7 @@
 # Object Orientation in JavaScript
 
 “Every application is a collection of code; the code’s arrangement is the
-design." - Sandy Metz
+design." - Sandi Metz
 
 ## Learning Goals
 
