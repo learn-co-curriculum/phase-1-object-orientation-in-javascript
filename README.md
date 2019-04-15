@@ -302,9 +302,9 @@ sarah.sayHello();
 // => Hello, my name is Sarah.
 
 restaurant.addGuest(evan);
-restaurant.addGuest(sally);
+restaurant.addGuest(sarah);
 restaurant.serveGuest(evan, new Drink('Water'));
-restaurant.serveGuest(sally, new Drink('Water'));
+restaurant.serveGuest(sarah, new Drink('Water'));
 
 evan.saySmallTalk();
 // => How about this weather?
