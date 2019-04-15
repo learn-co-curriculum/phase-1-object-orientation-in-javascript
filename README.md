@@ -92,15 +92,15 @@ let name = 'Evan';
 let age = 34;
 
 function sayHello(nameOfPerson) {
-	console.log(`Hello, my name is ${nameOfPerson}.`);
+  console.log(`Hello, my name is ${nameOfPerson}.`);
 }
 
 function sayAge(age) {
-	console.log(`I am ${age} years old.`);
+  console.log(`I am ${age} years old.`);
 }
 
 function haveBirthday(age) {
-	return age + 1;
+  return age + 1;
 }
 
 sayHello(name);
@@ -219,7 +219,7 @@ are programmed to do, regardless of the data they are given. They are oblivious.
 
 ```js
 function sayHello(nameOfPerson) {
-	console.log(`Hello, my name is ${nameOfPerson}.`);
+  console.log(`Hello, my name is ${nameOfPerson}.`);
 }
 
 sayHello([23, 'Golden Apple']);
