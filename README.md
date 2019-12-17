@@ -322,7 +322,7 @@ takes some practice to think in the OO mindset.
 
 ## Conclusion
 
-There is a lot to involved in writing Object Oriented code. In the upcoming
+There is a lot involved in writing Object Oriented code. In the upcoming
 lessons, we will build `class`es from scratch and talk about the different ways
 we can design them. Later on, we will introduce `class` interactions and how
 many instances of different `class`es can work together. Object Orientation
