@@ -33,7 +33,7 @@ other. This set up works great when just getting off the ground; with a handful
 of functions, we can get an interactive website up and running. What happens,
 though, when we want to go beyond a small website?
 
-Let's go back and take a look at the first app we discussed, [Simple Liker][simple liker]:
+Let's go back and take a look at the first app we discussed, [Simple Liker][simple-liker]:
 
 ![working example of favoriting a post][three-pillars-example-working]
 
@@ -335,5 +335,5 @@ and maintain.
 - [MDN - Object Oriented JavaScript for Beginners][mdn]
 
 [mdn]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS
-[simple liker]: https://github.com/learn-co-curriculum/fewpjs-stitching-together-the-three-pillars
+[simple-liker]: https://github.com/learn-co-curriculum/phase-1-stitching-together-the-three-pillars
 [three-pillars-example-working]: https://curriculum-content.s3.amazonaws.com/fewpjs/fewpjs-stitching-together-the-three-pillars/three-pillars-02.gif
